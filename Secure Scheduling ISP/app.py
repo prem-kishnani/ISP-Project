@@ -11,7 +11,7 @@ import numpy as np
 df = pd.read_csv('schedules.csv')
 df.set_index('Email',inplace=True)
 
-@app.route('/showschedule')
+@app.route('/home')
 @login_required
 def home():
     if current_user.is_authenticated:
@@ -25,7 +25,7 @@ def home():
 @app.route('/welcome')
 @login_required
 def welcome_user():
-    return render_template('welcome_user.html')
+    return redirect(url_for('home'))
 
 @app.route('/logout') 
 @login_required
