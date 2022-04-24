@@ -7,13 +7,16 @@
         </div>
         <p>Hi, {{current_user.username}}</p>
         <form method="POST">
-            {{form.hidden_tag()}}
-            {% for i in range(1,9) %}
-                <label for="Period {{i}}">Period {{i}}</label>
-                <textarea name="Period {{i}}" id="period-textbox" cols="30" rows="1">{{schedule[i-1]}}</textarea>
-                <br>
-            {% endfor %}
-        {{form.submit()}}
+            {{form.hidden_tag()}} <br>
+            {{form.p1.label}}{{form.p1()}} <br>
+            {{form.p2.label}}{{form.p2()}} <br>
+            {{form.p3.label}}{{form.p3()}} <br>
+            {{form.p4.label}}{{form.p4()}} <br>
+            {{form.p5.label}}{{form.p5()}} <br>
+            {{form.p6.label}}{{form.p6()}} <br>
+            {{form.p7.label}}{{form.p7()}} <br>
+            {{form.p8.label}}{{form.p8()}} <br>
+            {{form.save()}}
         </form>
         <br>
     {% else %}

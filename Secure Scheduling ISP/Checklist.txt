@@ -1,0 +1,10 @@
+UI
+Add emails for verification
+New users should be able to make schedules
+AWS
+Docker container
+API
+
+
+check for new user
+validate classes
