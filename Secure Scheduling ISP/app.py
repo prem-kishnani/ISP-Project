@@ -1,7 +1,7 @@
 #app.py
 from my_project import app,db
 from flask import render_template, redirect, request, url_for, flash, abort
-from flask_login import login_user, login_required, logout_user
+from flask_login import login_user, login_required, logout_user, current_user
 from my_project.models import User
 from my_project.forms import LoginForm, RegistrationForm
 from werkzeug.security import generate_password_hash, check_password_hash
@@ -9,11 +9,18 @@ import pandas as pd
 import numpy as np
 
 df = pd.read_csv('schedules.csv')
-df_transposed = df.transpose()
+df.set_index('Email',inplace=True)
 
-@app.route('/')
+@app.route('/showschedule')
+@login_required
 def home():
-    return render_template('home.html', tables=[df_transposed[[1]].to_html(classes='data')],titles=df.columns.values)
+    if current_user.is_authenticated:
+        schedule = []
+        print(current_user.email)
+        for i in range(1,9):
+            class_name = df.loc[current_user.email,f"Period {i}"]
+            schedule.append(class_name)
+    return render_template('home.html', schedule=schedule)
     
 @app.route('/welcome')
 @login_required
@@ -27,6 +34,9 @@ def logout():
     flash("You logged out!")
     return redirect(url_for('home'))
 
+@app.route('/')
+def index():
+    return render_template('index.html')
 
 @app.route('/login',methods=['GET','POST'])
 def login():
