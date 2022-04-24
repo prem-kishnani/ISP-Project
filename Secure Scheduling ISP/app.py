@@ -5,9 +5,11 @@ from flask_login import login_user, login_required, logout_user, current_user
 from my_project.models import User
 from my_project.forms import LoginForm, RegistrationForm, CourseForm
 from werkzeug.security import generate_password_hash, check_password_hash
+from my_project.email_func import email_verification
 import pandas as pd
 import numpy as np
-
+import time
+import smtplib, ssl
 
 
 @app.route('/home', methods=['GET','POST'])
@@ -108,6 +110,10 @@ def register():
         db.session.add(user)
         db.session.commit()
         flash("Thanks for registration!")
+        #EMAIL FUNCTION HERE
+        email_verification(user.email)
+
+        time.sleep(3)
         return redirect(url_for('login'))
     
     return render_template('register.html', form=form)

@@ -1,10 +1,14 @@
+TO DO:
 UI
-Add emails for verification
-New users should be able to make schedules
 AWS
 Docker container
 API
 
-
-check for new user
+OPTIONAL?:
 validate classes
+reset password?
+
+DONE:
+New users should be able to make schedules
+Add emails for verification (FIX SUBJECT LINE)
+check for new user
