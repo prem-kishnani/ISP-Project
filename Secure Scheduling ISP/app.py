@@ -20,8 +20,6 @@ def home():
 
     form = CourseForm()
 
-
-
     if form.validate_on_submit():
         print('Validated Form')
         print(form.p1.data)
