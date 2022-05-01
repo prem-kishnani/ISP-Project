@@ -2,13 +2,18 @@ TO DO:
 UI
 AWS
 Docker container
-API
+FastAPI
+
 
 OPTIONAL?:
-validate classes
 reset password?
+secure the GET and POST APIs
 
 DONE:
 New users should be able to make schedules
 Add emails for verification (FIX SUBJECT LINE)
 check for new user
+Validate classes
+API
+Alphabetize
+Validate classes from API

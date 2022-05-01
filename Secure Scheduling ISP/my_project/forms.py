@@ -21,6 +21,7 @@ class CourseForm(FlaskForm):
     df = pd.read_csv("json_test.csv")
     course_names = df['description']
     course_names.drop_duplicates(inplace=True)
+    course_names = course_names.sort_values(ascending=True)
     course_tuple = []
     for i in course_names:
         tmp=i.split('(')

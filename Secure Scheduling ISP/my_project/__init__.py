@@ -4,10 +4,22 @@ from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
 from flask_login import LoginManager
+from flask import jsonify
+from flask_httpauth import HTTPBasicAuth
 
 login_manager = LoginManager()
 
 app = Flask(__name__)
+auth = HTTPBasicAuth()
+
+@auth.verify_password
+def authenticate(username,password):
+    if username and password:
+        if username=="admin" and password=="fdkgfhbgfvcvfhbgfb":
+            return True
+        else:
+            return False
+    return False
 
 app.config['SECRET_KEY']='mysecretkey'
 basedir = os.path.abspath(os.path.dirname(__file__))

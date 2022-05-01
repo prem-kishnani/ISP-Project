@@ -1,5 +1,5 @@
 #app.py
-from my_project import app,db
+from my_project import app,db,auth
 from flask import render_template, redirect, request, url_for, flash, abort
 from flask_login import login_user, login_required, logout_user, current_user
 from my_project.models import User
@@ -10,6 +10,108 @@ import pandas as pd
 import numpy as np
 import time
 import smtplib, ssl
+import json
+
+@app.route('/rest-auth')
+@auth.login_required
+def get_response():
+    dictionary = dict()
+    dictionary["Success!"]="You are authorized to see this message"
+    return dictionary
+
+@app.route('/api/get', methods=['GET'])
+@auth.login_required
+def get_schedule():
+
+    args = request.args
+    email = args.get("email")
+    if email is None:
+        dictionary = dict()
+        dictionary["Request Was Incorrect"]=f"Your request was not correct. A proper endpoint would be http://127.0.0.1:5000/api/get?email= with you inputting your email at the end."
+        return dictionary
+    #If this email is not in the database, or the user didn't enter an email field, return an error json - separeate errors for email not found or email not in URL
+
+    df = pd.read_csv('schedules.csv',nrows=100000)
+    df.set_index('Email',inplace=True)
+    dictionary = dict()
+    dictionary["Email"]=f"{email}"
+
+    try:
+        for i in range(1,9):
+            dictionary[f"Period {i}"]=df.at[email,f"Period {i}"]
+    except:
+        dictionary = dict()
+        dictionary["KeyError"]=f"{email} is not in database. Try again with a valid email" 
+
+    #dictionary["Period 1"]=f"{df.at[current_user.email,'Period 1']}"
+    return dictionary
+
+
+@app.route('/api/post/blankuser',methods=['POST'])
+@auth.login_required
+def add_user():
+    some_json=request.get_json()
+    key_email = some_json["email"]
+    df = pd.read_csv('schedules.csv',nrows=100000)
+    df.set_index('Email',inplace=True)
+    if key_email not in df.index:
+        df.at[key_email] = None
+        df.to_csv("schedules.csv")
+        dictionary = dict()
+        dictionary["Email"]=key_email
+        dictionary["Result"]="Ok"
+        return dictionary
+    else :
+        dictionary=dict()
+        dictionary["Error"]="Your email is already in the database."
+        return dictionary
+
+@app.route('/api/post/userwschedule',methods=['POST'])
+@auth.login_required
+def add_schedule():
+    some_json=request.get_json()
+    key_email = some_json["email"]
+    key_classes = []
+    try:
+        for i in range(1,9):
+            key_classes.append(some_json[f"p{i}"])
+    except:
+        dictionary=dict()
+        dictionary["Error"]="Please use all the right parameters for your input. REFERENCE"
+        return dictionary
+
+
+    df = pd.read_csv("json_test.csv")
+    course_names = df['description']
+    course_names.drop_duplicates(inplace=True)
+    course_names = course_names.sort_values(ascending=True)
+    course_names_list = []
+    for i in course_names:
+        tmp=i.split('(')
+        tmp=tmp[0][:-1]
+        course_names_list.append(tmp)
+
+    for key_class in key_classes:
+        if key_class not in course_names_list:
+            dictionary=dict()
+            dictionary["Error"]=f"{key_class} is not in the list of available classes."
+            return dictionary
+
+    df = pd.read_csv('schedules.csv',nrows=100000)
+    df.set_index('Email',inplace=True)
+    if key_email not in df.index:
+        df.at[key_email] = None
+        for i in range(1,9):
+            df.at[key_email,f"Period {i}"]=key_classes[i-1]
+        df.to_csv("schedules.csv")
+        dictionary = dict()
+        dictionary["Email"]=key_email
+        dictionary["Result"]="Ok"
+        return dictionary
+    else :
+        dictionary=dict()
+        dictionary["Error"]="Your email is already in the database."
+        return dictionary
 
 
 @app.route('/home', methods=['GET','POST'])
@@ -18,6 +120,7 @@ def home():
     df = pd.read_csv('schedules.csv',nrows=100000)
     df.set_index('Email',inplace=True)
 
+    
     form = CourseForm()
 
     if form.validate_on_submit():
