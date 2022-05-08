@@ -20,7 +20,7 @@ auth = HTTPBasicAuth()
 def authenticate(username,password):
     if username and password:
         # Environment variables to protect password from being exposed, and authenticate the username and password.
-        if username=="admin" and password=="fdkgfhbgfvcvfhbgfb":
+        if username=="admin" and password==os.environ["Password"]:
             return True
         else:
             return False
@@ -38,3 +38,11 @@ Migrate(app,db)
 
 login_manager.init_app(app)
 login_manager.login_view = 'login'
+
+
+os.environ.get("password")
+os.environ.get("password")
+
+
+
+#"fdkgfhbgfvcvfhbgfb"

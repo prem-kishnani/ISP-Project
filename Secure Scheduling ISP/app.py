@@ -232,31 +232,31 @@ def login():
     form = LoginForm()
     if form.validate_on_submit():
         user = User.query.filter_by(email=form.email.data).first()
-
+        # Login the user by using built in functions
         if user.check_password(form.password.data) and user is not None:
             login_user(user)
             flash("Logged in Succesfully!")
 
             next = request.args.get('next')
-
+            # Url for the next page, which is how you welcome the user.
             if next == None or not next[0] == '/':
                 next = url_for('welcome_user')
-            
+            # Redirect to 'welcome_user'
             return redirect(next)
-
+    # Send the user to the login page
     return render_template('login.html', form=form) 
 
 #Register a new user manually without API
 @app.route('/register',methods=['GET','POST'])
 def register(): 
     form = RegistrationForm()
-
+    # Check for validation
     if form.validate_on_submit():
         user = User(email=form.email.data, username=form.username.data, password=form.password.data)
-
+        # Add the user to our database
         db.session.add(user)
         db.session.commit()
-        flash("Thanks for registration!")
+        flash("Thank you for registering!")
         #EMAIL FUNCTION HERE
         email_verification(user.email)
 
