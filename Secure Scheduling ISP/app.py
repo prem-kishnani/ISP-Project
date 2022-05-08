@@ -1,5 +1,5 @@
 #app.py
-from my_project import app,db,auth
+from my_project import app,db,auth, serve
 from flask import render_template, redirect, request, url_for, flash, abort
 from flask_login import login_user, login_required, logout_user, current_user
 from my_project.models import User
@@ -11,6 +11,7 @@ import numpy as np
 import time
 import smtplib, ssl
 import json
+
 
 @app.route('/api-doc')
 def apidoc():
@@ -245,4 +246,5 @@ def updated():
     return render_template("db_updated.html")
 
 if __name__ == '__main__':
-    app.run(debug=True, host="0.0.0.0",port="8080",ssl_context="adhoc")
+    #app.run(debug=True, host="0.0.0.0",port="8080",ssl_context="adhoc")
+    serve(app,host="0.0.0.0",port="8080",url_scheme="https")

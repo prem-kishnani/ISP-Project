@@ -6,7 +6,7 @@ from flask_migrate import Migrate
 from flask_login import LoginManager
 from flask import jsonify
 from flask_httpauth import HTTPBasicAuth
-
+from waitress import serve
 
 login_manager = LoginManager()
 
