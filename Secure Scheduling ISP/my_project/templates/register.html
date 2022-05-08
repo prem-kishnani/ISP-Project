@@ -1,11 +1,14 @@
 {% extends "base.html" %}
 {% block content %}
-    <form method="POST">
+<div class="jumbotron bg-danger">
+
+</div>
+<form method="POST">
         {{form.hidden_tag()}} <br>
         {{form.email.label}}{{form.email()}} <br>
-        {{form.username.label}}{{form.username()}} <br>
-        {{form.password.label}}{{form.password()}} <br>
-        {{form.pass_confirm.label}}{{form.pass_confirm()}} <br>
+        {{form.username.label}}&emsp;{{form.username()}} <br>
+        {{form.password.label}}&emsp;{{form.password()}} <br>
+        {{form.pass_confirm.label}}&emsp;{{form.pass_confirm()}} <br>
         {{form.submit()}} 
     </form>
 {% endblock %}

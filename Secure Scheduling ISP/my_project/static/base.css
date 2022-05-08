@@ -1,5 +1,6 @@
 div {
     background-color: #5DB8FF;
+    
 }
 
 h2 {
@@ -8,3 +9,18 @@ h2 {
     bottom: 0;
 }
 
+#rightRegister {
+    float: right;
+}
+
+body {
+    background-image: url("allen_high_school_image.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.allenisdlogo {
+    margin-left: 5vw;
+    width: 12vh;
+    height: 9.5vh;
+}

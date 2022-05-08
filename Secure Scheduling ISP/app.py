@@ -12,6 +12,11 @@ import time
 import smtplib, ssl
 import json
 
+@app.route('/api-doc')
+def apidoc():
+    return render_template("api_doc.html")    
+    # return render_template("api_doc_with_base.html")
+
 @app.route('/rest-auth')
 @auth.login_required
 def get_response():
@@ -27,7 +32,7 @@ def get_schedule():
     email = args.get("email")
     if email is None:
         dictionary = dict()
-        dictionary["Request Was Incorrect"]=f"Your request was not correct. A proper endpoint would be http://127.0.0.1:5000/api/get?email= with you inputting your email at the end."
+        dictionary["Incorrect Request"]=f"Your request was not correct. A proper endpoint would be http://127.0.0.1:5000/api/get?email= with you inputting your email at the end."
         return dictionary
     #If this email is not in the database, or the user didn't enter an email field, return an error json - separeate errors for email not found or email not in URL
 
@@ -51,7 +56,12 @@ def get_schedule():
 @auth.login_required
 def add_user():
     some_json=request.get_json()
-    key_email = some_json["email"]
+    try:
+        key_email = some_json["email"]
+    except:
+        dictionary=dict()
+        dictionary["KeyError"] = "You did not input an 'email' field."
+        return dictionary
     df = pd.read_csv('schedules.csv',nrows=100000)
     df.set_index('Email',inplace=True)
     if key_email not in df.index:
@@ -70,7 +80,12 @@ def add_user():
 @auth.login_required
 def add_schedule():
     some_json=request.get_json()
-    key_email = some_json["email"]
+    try:
+        key_email = some_json["email"]
+    except:
+        dictionary=dict()
+        dictionary["KeyError"] = "You did not input an 'email' field."
+        return dictionary
     key_classes = []
     try:
         for i in range(1,9):

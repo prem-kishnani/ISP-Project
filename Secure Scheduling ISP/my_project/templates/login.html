@@ -1,9 +1,12 @@
 {% extends "base.html" %}
 {% block content %}
+<div class="jumbotron bg-danger">
+    Please enter your email and password to login.  If you don't have an account, you can register for one using the link above.
     <form method="POST">
         {{form.hidden_tag()}} <br>
-        {{form.email.label}}{{form.email()}} <br>
-        {{form.password.label}}{{form.password()}} <br>
+        {{form.email.label}}&emsp;{{form.email()}} <br>
+        {{form.password.label}}&emsp;{{form.password()}} <br>
         {{form.submit()}}
     </form>
+</div>
 {% endblock %}

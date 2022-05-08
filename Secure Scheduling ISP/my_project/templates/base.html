@@ -12,15 +12,24 @@
     <title>Document</title>
 </head>
 <body>
-    <ul class="nav navbar-expand-lg bg-dark">
-        <li class="nav-link text-success"><a class="text-success" href="{{url_for('home')}}">Home</a></li>
+    <ul class="nav navbar-expand-lg bg-primary">
+        <a class="allenisdlogo" href="/">
+            <div class="logo-image"> 
+                  <img src="../static/allenisdlogo.png" class="img-fluid">
+            </div>
+      </a>
+        <h3 class='text-white'>Allen HS Scheduling Tracker with SQL and API</h3>
+        <li class="nav-link text-white"><a class="text-white" href="{{url_for('home')}}">Home</a></li>
         {% if current_user.is_authenticated %} 
-        <li class="nav-link text-success"><a class='text-success' href="{{url_for('logout')}}">Log Out</a></li>
+        <li class="nav-link text-white"><a class='text-white' href="{{url_for('logout')}}">Log Out</a></li>
         {% else %}
-        <li class='nav-link text-success'><a class="text-success" href="{{url_for('login')}}">Log In</a></li>
-        <li class='nav-link text-success'><a class="text-success" href="{{url_for('register')}}">Register</a></li>
+        <li id="right-log-in" class='nav-link text-white'><a class="text-white" href="{{url_for('login')}}">Log In</a></li>
+        <li id="rightRegister" class='nav-link text-white'><a class="text-white" href="{{url_for('register')}}">Register</a></li>
         {% endif %}
+        <li id="rightRegister" class='nav-link text-white'><a class="text-white" href="{{url_for('apidoc')}}">API Documentation</a></li>
+
     </ul>
+    
     <h2>Made by Prem Kishnani</h2>
     {% block content %}
 

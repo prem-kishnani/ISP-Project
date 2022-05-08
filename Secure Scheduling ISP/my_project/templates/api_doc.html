@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <!-- CSS only -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>API Reference</title>
+</head>
+<body>
+    <h1>API Documentation</h1>
+        <div class="accordion" id="accordionExample">
+            <!-- GET -->
+            <div class="accordion-item">
+                <h2 class="accordion-header get" id="headingOne">
+                    <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                    <strong>GET</strong>
+                    </button>
+                </h2>
+                <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
+                <div class="accordion-body">
+                    <h4>Endpoint: /api/get?email=[insert email here]</h4>
+                    <p>Parameters: Email</p>
+                    <div class="example">
+                        Request: http://127.0.0.1:5000/api/get?email=prem.kishnani@student.allenisd.org <br>
+                        Output: {
+                            <ul>
+                            <li>"Email": "prem.kishnani@student.allenisd.org",</li>
+                            <li>"Period 1": "AP Calculus BC",</li>
+                            <li>"Period 2": "Privilege Period I 12th",</li>
+                            <li>"Period 3": "Jazz Band 12",</li>
+                            <li>"Period 4": "AP Physics C",</li>
+                            <li>"Period 5": "Wind Symphony",</li>
+                            <li>"Period 6": "AP English IV",</li>
+                            <li>"Period 7": "Privilege Period II 12th",</li>
+                            <li>"Period 8": "Privilege Period III 12th"</li>
+                            </ul>
+                        }
+                    </div>
+                    <div class="errors">
+                        <p><u>Incorrect Request:</u> Your request was not correct. A proper endpoint would be http://127.0.0.1:5000/api/get?email= with you inputting your email at the end.</p>
+                        <p><u>Key Error:</u> [Email] is not in database. Try again with a valid email</p>
+                    </div>
+                </div>
+                </div>
+            </div>
+            <!-- POST -->
+            <div class="accordion-item">
+                <h2 class="accordion-header" id="headingTwo">
+                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                    <strong>POST</strong>
+                    </button>
+                </h2>
+                <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#accordionExample">
+                <div class="accordion-body">
+                    <div class="accordion" id="accordionExample">
+                        <!-- BLANK USER -->
+                        <div class="accordion-item">
+                            <h2 class="accordion-header post-1" id="headingThree">
+                                <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="true" aria-controls="collapseThree">
+                                <strong>BLANK USER (Without Schedule)</strong>
+                                </button>
+                            </h2>
+                            <div id="collapseThree" class="accordion-collapse collapse show" aria-labelledby="headingThree" data-bs-parent="#accordionExample">
+                            <div class="accordion-body">
+                                <h4>Endpoint: /api/post/blankuser</h4>
+                                <p>Parameters: Email</p>
+                                <p>Valid Request: {
+                                    "email":"new@something.com"
+                                }   </p>
+                                <div class="example">
+                                Request: http://127.0.0.1:5000/api/post/blankuser?email="prem.kishnani@student.allenisd.org" <br>
+                                Output: {
+                                    "Email": "new@something.com",
+                                    "Result": "Ok"
+                                }
+                                </div>
+                                <div class="errors">
+                                    <p><u>Error:</u> Your email is already in the database.</p>
+                                </div>
+                            </div>
+                            </div>
+                        </div>
+                        <div class="accordion-item">
+                            <h2 class="accordion-header post-2" id="headingFour">
+                                <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFour" aria-expanded="true" aria-controls="collapseFour">
+                                <strong>NEW USER (With Schedule)</strong>
+                                </button>
+                            </h2>
+                            <div id="collapseFour" class="accordion-collapse collapse show" aria-labelledby="headingFour" data-bs-parent="#accordionExample">
+                                <div class="accordion-body">
+                                    <h4>Endpoint: /api/post/blankuser</h4>
+                                    <p>Parameters: Email</p>
+                                    <p>Valid Request: {
+                                            <br>
+                                            "email": "test_new_user@something.com", <br>
+                                            "p1": "AP Calculus BC", <br>
+                                            "p2": "Privilege Period I 12th", <br>
+                                            "p3": "Jazz Band 12", <br>
+                                            "p4": "AP Physics C", <br>
+                                            "p5": "Wind Symphony", <br>
+                                            "p6": "AP English IV", <br>
+                                            "p7": "Privilege Period II 12th", <br>
+                                            "p8": "Privilege Period III 12th" <br>
+                                        
+                                    }   </p>
+                                    <div class="example">
+                                    Request: http://127.0.0.1:5000/api/post/blankuser?email="prem.kishnani@student.allenisd.org" <br>
+                                    Output: {
+                                        "Email": "new@something.com",
+                                        "Result": "Ok"
+                                    }
+                                    </div>
+                                    <div class="errors">
+                                        <p><u>Error:</u> Your email is already in the database.</p>
+                                    </div>
+                            </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                </div>
+            </div>
+        </div>
+</body>
+</html>

@@ -1,21 +1,21 @@
 {% extends "base.html" %}
 {% block content %}
-<div class="jumbotron bg-warning">
+<div class="jumbotron bg-danger">
     {% if current_user.is_authenticated %}
         <div class="alert alert-success" role="alert">
-            Congrats! You're logged in!
+            You can select your classes below.
         </div>
         <p>Hi, {{current_user.username}}</p>
         <form method="POST">
             {{form.hidden_tag()}} <br>
-            {{form.p1.label}}{{form.p1}} <br>
-            {{form.p2.label}}{{form.p2}} <br>
-            {{form.p3.label}}{{form.p3}} <br>
-            {{form.p4.label}}{{form.p4}} <br>
-            {{form.p5.label}}{{form.p5}} <br>
-            {{form.p6.label}}{{form.p6}} <br>
-            {{form.p7.label}}{{form.p7}} <br>
-            {{form.p8.label}}{{form.p8}} <br>
+            {{form.p1.label}}&emsp;{{form.p1}} <br>
+            {{form.p2.label}}&emsp;{{form.p2}} <br>
+            {{form.p3.label}}&emsp;{{form.p3}} <br>
+            {{form.p4.label}}&emsp;{{form.p4}} <br>
+            {{form.p5.label}}&emsp;{{form.p5}} <br>
+            {{form.p6.label}}&emsp;{{form.p6}} <br>
+            {{form.p7.label}}&emsp;{{form.p7}} <br>
+            {{form.p8.label}}&emsp;{{form.p8}} <br>
             {{form.save()}}
         </form>
         <br>
