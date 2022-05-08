@@ -1,13 +1,14 @@
-#models.py
+#models.py imports
 from my_project import db, login_manager
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_login import UserMixin
 
+# Default decorator from login_manager
 @login_manager.user_loader
 def load_user(user_id):
     return User.query.get(user_id)
 
-
+# Making a class that uses db.Model and UserMixin as the base
 class User(db.Model,UserMixin):
     __tablename__ = 'users'
 

@@ -1,15 +1,17 @@
-#forms.py
+#forms.py imports
 from flask_wtf import FlaskForm
 from wtforms import StringField, PasswordField, SubmitField, TextAreaField, SelectField
 from wtforms.validators import DataRequired,Email,EqualTo, InputRequired, Length
 from wtforms import ValidationError
 import pandas as pd
 
+# Initialize LoginForm with parameters that are mapped to certain fields.
 class LoginForm(FlaskForm):
     email = StringField('Email',validators=[DataRequired(),Email()])
     password = PasswordField('Password',validators=[DataRequired()])
     submit = SubmitField("Log in")
 
+# Initialize RegistrationForm with parameters that are mapped to certain fields.
 class RegistrationForm(FlaskForm):
     email = StringField('Email',validators=[DataRequired(),Email()])
     username = StringField('Username',validators=[DataRequired()])
@@ -17,7 +19,9 @@ class RegistrationForm(FlaskForm):
     pass_confirm = PasswordField('Confirm Password',validators=[DataRequired()])
     submit = SubmitField('Register!')
 
+# Initialize CourseForm with parameters that are mapped to certain fields.
 class CourseForm(FlaskForm):
+    # This code is designed to work with the dropdowns, which require a tuple.
     df = pd.read_csv("json_test.csv")
     course_names = df['description']
     course_names.drop_duplicates(inplace=True)
@@ -41,11 +45,12 @@ class CourseForm(FlaskForm):
 
 
 
-
+# If the email given is equal to an existing email, return a validationError 
 def check_email(self,field):
     if User.query.filter_by(email=field.data).first():
         raise ValidationError('Your email has been already registered!')
 
+# If the username given is equal to an existing username, return a validationError
 def check_username(self,field):
     if User.query.filter_by(username=field.data).first():
         raise ValidationError('Your username has already been registered!')

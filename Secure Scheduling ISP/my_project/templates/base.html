@@ -12,6 +12,7 @@
     <title>Document</title>
 </head>
 <body>
+    <!-- A navbar for each website link -->
     <ul class="nav navbar-expand-lg bg-primary">
         <a class="allenisdlogo" href="/">
             <div class="logo-image"> 
@@ -29,7 +30,7 @@
         <li id="rightRegister" class='nav-link text-white'><a class="text-white" href="{{url_for('apidoc')}}">API Documentation</a></li>
 
     </ul>
-    
+    <!-- Establishes base.html as a template that can be extended, like a subclass in Java -->
     {% block content %}
 
     {% endblock %}
