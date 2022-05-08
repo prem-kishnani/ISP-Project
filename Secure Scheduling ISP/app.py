@@ -17,6 +17,12 @@ def apidoc():
     return render_template("api_doc.html")    
     # return render_template("api_doc_with_base.html")
 
+@app.route('/rest-unauth')
+def open_response():
+    dictionary=dict()
+    dictionary["Ok"]="Anyone can see this message without authentication"
+    return dictionary
+
 @app.route('/rest-auth')
 @auth.login_required
 def get_response():
@@ -32,7 +38,7 @@ def get_schedule():
     email = args.get("email")
     if email is None:
         dictionary = dict()
-        dictionary["Incorrect Request"]=f"Your request was not correct. A proper endpoint would be http://127.0.0.1:5000/api/get?email= with you inputting your email at the end."
+        dictionary["Incorrect Request"]=f"Your request was not correct. A proper endpoint would be {URL}/api/get?email= with you inputting your email at the end."
         return dictionary
     #If this email is not in the database, or the user didn't enter an email field, return an error json - separeate errors for email not found or email not in URL
 
@@ -239,4 +245,4 @@ def updated():
     return render_template("db_updated.html")
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(debug=True, host="0.0.0.0",port="8080",ssl_context="adhoc")

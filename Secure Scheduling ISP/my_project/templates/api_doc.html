@@ -11,6 +11,9 @@
 </head>
 <body>
     <h1>API Documentation</h1>
+        <div class="jumbotron bg-danger">
+            <h3>You can use this page to find proper parameters, check for errors, and see documentation for the API endpoints.</h3>
+        </div>
         <div class="accordion" id="accordionExample">
             <!-- GET -->
             <div class="accordion-item">
@@ -40,8 +43,9 @@
                         }
                     </div>
                     <div class="errors">
-                        <p><u>Incorrect Request:</u> Your request was not correct. A proper endpoint would be http://127.0.0.1:5000/api/get?email= with you inputting your email at the end.</p>
-                        <p><u>Key Error:</u> [Email] is not in database. Try again with a valid email</p>
+                        <h4><u>Incorrect Request:</u> </h4>
+                        <p>Your request was not correct. A proper endpoint would be http://127.0.0.1:5000/api/get?email= with you inputting your email at the end. </p>
+                        <h4><u>Key Error:</u> </h4> <p>[Email] is not in database. Try again with a valid email</p>
                     </div>
                 </div>
                 </div>
@@ -78,7 +82,7 @@
                                 }
                                 </div>
                                 <div class="errors">
-                                    <p><u>Error:</u> Your email is already in the database.</p>
+                                    <h4><u>Error:</h4> <p>Your email is already in the database.</p>
                                 </div>
                             </div>
                             </div>
@@ -91,8 +95,8 @@
                             </h2>
                             <div id="collapseFour" class="accordion-collapse collapse show" aria-labelledby="headingFour" data-bs-parent="#accordionExample">
                                 <div class="accordion-body">
-                                    <h4>Endpoint: /api/post/blankuser</h4>
-                                    <p>Parameters: Email</p>
+                                    <h4>Endpoint: /api/post/userwschedule</h4>
+                                    <p>Parameters: Email and Class Periods</p>
                                     <p>Valid Request: {
                                             <br>
                                             "email": "test_new_user@something.com", <br>
@@ -107,14 +111,17 @@
                                         
                                     }   </p>
                                     <div class="example">
-                                    Request: http://127.0.0.1:5000/api/post/blankuser?email="prem.kishnani@student.allenisd.org" <br>
+                                    Request: http://127.0.0.1:5000/api/post/userwschedule <br>
                                     Output: {
                                         "Email": "new@something.com",
                                         "Result": "Ok"
                                     }
                                     </div>
                                     <div class="errors">
-                                        <p><u>Error:</u> Your email is already in the database.</p>
+                                        <h4><u>Error:</u></h4> <p>Your email is already in the database.</p>
+                                        <h4><u>Error:</u></h4> <p>Please use all the right parameters for your input.</p>
+                                        <h4><u>Key Error:</u></h4> <p>You did not input an email field.</p>
+
                                     </div>
                             </div>
                             </div>

@@ -7,6 +7,7 @@ from flask_login import LoginManager
 from flask import jsonify
 from flask_httpauth import HTTPBasicAuth
 
+
 login_manager = LoginManager()
 
 app = Flask(__name__)
