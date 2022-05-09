@@ -1,9 +1,10 @@
+import os
 import smtplib, ssl
 from email.mime.text import MIMEText
 
 def email_verification(receiver_email):
     port = 465
-    password = input("Type your password and press enter:")
+    password = os.environ["ISPEmailPassword"]
     smtp_server = "smtp.gmail.com"
     sender_email = "pkishnaniisp@gmail.com"
     message = """\n
@@ -16,3 +17,5 @@ def email_verification(receiver_email):
     with smtplib.SMTP_SSL(smtp_server, port, context=context) as server:
         server.login(sender_email,password)
         server.sendmail(sender_email,receiver_email,message)
+
+email_verification("neelz75@gmail.com")

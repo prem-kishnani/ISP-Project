@@ -83,6 +83,7 @@ def add_user():
         dictionary = dict()
         dictionary["Email"]=key_email
         dictionary["Result"]="Ok"
+        #email_verification(key_email)
         return dictionary
     # Email is already in the database, which is an error. Can't have duplicate emails.
     else:
@@ -145,6 +146,7 @@ def add_schedule():
         dictionary = dict()
         dictionary["Email"]=key_email
         dictionary["Result"]="Ok"
+        #email_verification(key_email)
         return dictionary
     # If not, handle the error
     else :
